@@ -14,13 +14,13 @@ Q <-1000
 ###END CHECK THE FOLLOWING CONDITIONS BEFORE RUNNNG###
 
 #load files with the astronomical tide heights for the NL station
-tides12to90 <- read.csv(file = "high_tides_NL.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-tidedates12to90 <- read.csv(file = "high_dates_NL.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-surge_posteriors <- read.csv(file = "storm_surge_posteriors.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+tides12to90 <- read.csv(file = "high_tides_NL.csv", header=FALSE, sep=",", stringsAsFactors=FALSE, quote="")
+tidedates12to90 <- read.csv(file = "high_dates_NL.csv", header=FALSE, sep=",", stringsAsFactors=FALSE, quote="")
+surge_posteriors <- read.csv(file = "storm_surge_posteriors.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, quote="")
 
 #load data files
-VitalRates <- read.csv(file = "IBM_parameters.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
-SLR_Rahm_all <- read.csv(file = "SLR_Rahmstorf.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+VitalRates <- read.csv(file = "IBM_parameters.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, quote="")
+SLR_Rahm_all <- read.csv(file = "SLR_Rahmstorf.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, quote="")
 
 #load libraries, detect and register cores, and use the foreach command to do parallel computing for each iteration of the parameter uncertainty loop
 library('parallel')
@@ -46,7 +46,7 @@ renest_prob_lat <- renest_prob_MCMC[renest_prob_row, 2]
 renest_prob_sd <- 0
 
 #load nest failure probabilities
-nest_fail <- read.csv(file = "nest_failure_MCMC.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+nest_fail <- read.csv(file = "nest_failure_MCMC.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, quote="")
 #randomly select a row number, which will be used to draw a vector of parameter values from the same step of the MCMC chain
 nest_fail_row <- sample(1000, 1)
 #intercept
@@ -73,7 +73,7 @@ clutch_size_4 <- exp(rnorm(1, 2.1171442, 0.1467794))
 clutch_size_5 <- exp(rnorm(1, 0.4307773, 0.1781254))
 
 #load values for adult survival
-surv_CT <- read.csv(file = "surv_avgsite_MCMC.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+surv_CT <- read.csv(file = "surv_avgsite_MCMC.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, quote="")
 #randomly select a row number, which will be used to pull parameter values from the same iteration of the MCMC chain
 surv_bysite_row <- sample(1000, 1)
 survival_sitevector <- surv_CT[surv_bysite_row, 1]
